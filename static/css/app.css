@@ -1,0 +1,39 @@
+:root {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --brand: #0f172a;
+  --ok: #16a34a;
+  --warn: #f59e0b;
+  --danger: #dc2626;
+  --border: #e2e8f0;
+}
+
+body { background: var(--bg); color: var(--text); }
+
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: .75rem; padding: 1rem; box-shadow: 0 1px 2px rgba(2,6,23,.04); }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: .75rem; padding: 1rem; }
+
+.btn { display: inline-flex; align-items: center; gap: .4rem; border-radius: .5rem; padding: .5rem .9rem; font-weight: 600; border: 1px solid transparent; cursor: pointer; }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-secondary { background: #e2e8f0; color: #0f172a; }
+.btn-warn { background: var(--warn); color: #111827; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-amber { background: #f59e0b; color: #111827; }
+
+.input, .select, .textarea { width: 100%; border: 1px solid var(--border); border-radius: .5rem; padding: .5rem .75rem; background: #fff; color: var(--text); }
+
+.table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.table th { color: var(--muted); text-align: right; font-weight: 600; padding: .5rem .25rem; }
+.table td { padding: .6rem .25rem; border-top: 1px solid var(--border); }
+
+.badge { display: inline-flex; align-items: center; border-radius: 999px; padding: .15rem .6rem; font-size: .75rem; border: 1px solid var(--border); }
+.badge.ok { background: #dcfce7; color: #065f46; border-color: #bbf7d0; }
+.badge.warn { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; }
+.kpi { padding: 1rem; border-radius: .75rem; background: linear-gradient(180deg,#ffffff 0%,#f8fafc 100%); border: 1px solid var(--border); }
+.kpi .label { color: var(--muted); font-size: .85rem; }
+.kpi .value { font-size: 1.6rem; font-weight: 800; }

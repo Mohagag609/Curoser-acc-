@@ -1,0 +1,29 @@
+<table class="min-w-full text-sm">
+  <thead>
+    <tr class="text-right text-slate-500">
+      <th class="py-2">الاسم</th>
+      <th class="py-2">الهاتف</th>
+      <th class="py-2">الرقم القومي</th>
+      <th class="py-2">الحالة</th>
+      <th class="py-2 w-40">إجراءات</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in customers %}
+    <tr class="border-t">
+      <td class="py-2">{{ c.name }}</td>
+      <td class="py-2">{{ c.phone }}</td>
+      <td class="py-2">{{ c.national_id }}</td>
+      <td class="py-2">{{ c.status }}</td>
+      <td class="py-2 flex gap-2">
+        <button class="px-3 py-1 rounded bg-amber-500 text-white"
+                hx-get="{% url 'customer_edit' c.pk %}" hx-target="#c-form" hx-swap="innerHTML">تعديل</button>
+        <button class="px-3 py-1 rounded bg-red-600 text-white"
+                hx-post="{% url 'customer_delete' c.pk %}" hx-confirm="تأكيد حذف؟" hx-target="#c-table">حذف</button>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="py-6 text-center text-slate-500">لا توجد بيانات</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

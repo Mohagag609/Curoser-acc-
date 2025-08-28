@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}العقود{% endblock %}
+{% block page_title %}العقود{% endblock %}
+{% block content %}
+<div class="bg-white rounded shadow p-4">
+  <div class="flex gap-2 mb-4">
+    <button class="px-4 py-2 rounded bg-slate-900 text-white" hx-get="{% url 'contract_form' %}" hx-target="#ct-form" hx-swap="innerHTML">عقد جديد</button>
+  </div>
+  <div id="ct-form" class="mb-4"></div>
+  <div id="ct-table" hx-get="{% url 'contracts_table' %}" hx-trigger="load"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}السندات{% endblock %}
+{% block page_title %}السندات{% endblock %}
+{% block content %}
+<div class="bg-white rounded shadow p-4">
+  <div id="v-table" hx-get="{% url 'vouchers_table' %}" hx-trigger="load"></div>
+</div>
+{% endblock %}

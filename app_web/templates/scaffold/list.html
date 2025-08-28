@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block page_title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="bg-white shadow rounded p-4">
+  <h2 class="font-bold text-lg mb-3">{{ title }}</h2>
+  <div class="text-slate-600">هذه صفحة تمهيدية. سنربطها بالبيانات وخدمات HTMX لاحقًا.</div>
+  <div class="mt-4 flex gap-2">
+    <input class="border rounded px-3 py-2" placeholder="بحث...">
+    <button class="px-4 py-2 rounded bg-slate-900 text-white">إضافة</button>
+  </div>
+</div>
+{% endblock %}
