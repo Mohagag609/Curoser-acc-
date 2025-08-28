@@ -1,0 +1,33 @@
+<table class="min-w-full text-sm">
+  <thead>
+    <tr class="text-right text-slate-500">
+      <th class="py-2">الكود</th>
+      <th class="py-2">الاسم</th>
+      <th class="py-2">البرج</th>
+      <th class="py-2">الدور</th>
+      <th class="py-2">النوع</th>
+      <th class="py-2">السعر</th>
+      <th class="py-2 w-40">إجراءات</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in units %}
+    <tr class="border-t">
+      <td class="py-2">{{ u.code }}</td>
+      <td class="py-2">{{ u.name }}</td>
+      <td class="py-2">{{ u.building }}</td>
+      <td class="py-2">{{ u.floor }}</td>
+      <td class="py-2">{{ u.unit_type }}</td>
+      <td class="py-2">{{ u.total_price }}</td>
+      <td class="py-2 flex gap-2">
+        <button class="px-3 py-1 rounded bg-amber-500 text-white"
+                hx-get="{% url 'unit_edit' u.pk %}" hx-target="#u-form" hx-swap="innerHTML">تعديل</button>
+        <button class="px-3 py-1 rounded bg-red-600 text-white"
+                hx-post="{% url 'unit_delete' u.pk %}" hx-confirm="تأكيد حذف؟" hx-target="#u-table">حذف</button>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7" class="py-6 text-center text-slate-500">لا توجد بيانات</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

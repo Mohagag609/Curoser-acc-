@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from app_core import models as m
-from .forms import CustomerForm
+from .forms import CustomerForm, UnitForm
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -55,7 +55,54 @@ def customer_delete(request, pk: int):
 
 
 def units_index(request):
-    return render(request, 'scaffold/list.html', {"title": "الوحدات"})
+    return render(request, 'units/index.html', {"title": "الوحدات"})
+
+
+def units_table(request):
+    q = (request.GET.get('q') or '').strip()
+    qs = m.Unit.objects.all().order_by('code')
+    if q:
+        qs = qs.filter(name__icontains=q) | qs.filter(code__icontains=q)
+    return render(request, 'units/_table.html', {"units": qs})
+
+
+@require_POST
+def unit_create(request):
+    form = UnitForm(request.POST)
+    if form.is_valid():
+        unit = form.save(commit=False)
+        if not unit.code:
+            # توليد كود مبسط عند عدم إدخاله
+            base = (unit.building or '').replace(' ', '')
+            floor = (unit.floor or '').replace(' ', '')
+            name = (unit.name or '').replace(' ', '')
+            unit.code = f"{base}-{floor}-{name}" or "U-" + str(m.Unit.objects.count() + 1)
+        unit.save()
+        return units_table(request)
+    return render(request, 'units/_form.html', {"form": form}, status=400)
+
+
+def unit_edit(request, pk: int):
+    unit = get_object_or_404(m.Unit, pk=pk)
+    form = UnitForm(instance=unit)
+    return render(request, 'units/_form.html', {"form": form, "obj": unit})
+
+
+@require_POST
+def unit_update(request, pk: int):
+    unit = get_object_or_404(m.Unit, pk=pk)
+    form = UnitForm(request.POST, instance=unit)
+    if form.is_valid():
+        unit = form.save()
+        return units_table(request)
+    return render(request, 'units/_form.html', {"form": form, "obj": unit}, status=400)
+
+
+@require_POST
+def unit_delete(request, pk: int):
+    unit = get_object_or_404(m.Unit, pk=pk)
+    unit.delete()
+    return units_table(request)
 
 
 def contracts_index(request):
