@@ -11,7 +11,12 @@ class CustomerForm(forms.ModelForm):
         model = m.Customer
         fields = ["name", "phone", "national_id", "address", "status", "notes"]
         widgets = {
-            "notes": forms.Textarea(attrs={"rows": 2}),
+            "name": forms.TextInput(attrs={"class": "w-full border rounded px-3 py-2"}),
+            "phone": forms.TextInput(attrs={"class": "w-full border rounded px-3 py-2"}),
+            "national_id": forms.TextInput(attrs={"class": "w-full border rounded px-3 py-2"}),
+            "address": forms.TextInput(attrs={"class": "w-full border rounded px-3 py-2"}),
+            "status": forms.TextInput(attrs={"class": "w-full border rounded px-3 py-2"}),
+            "notes": forms.Textarea(attrs={"rows": 2, "class": "w-full border rounded px-3 py-2"}),
         }
 
 

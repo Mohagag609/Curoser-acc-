@@ -5,27 +5,27 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
     <div>
       <label class="text-xs text-slate-500">الاسم</label>
-      {{ form.name|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.name }}
     </div>
     <div>
       <label class="text-xs text-slate-500">الهاتف</label>
-      {{ form.phone|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.phone }}
     </div>
     <div>
       <label class="text-xs text-slate-500">الرقم القومي</label>
-      {{ form.national_id|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.national_id }}
     </div>
     <div class="md:col-span-2">
       <label class="text-xs text-slate-500">العنوان</label>
-      {{ form.address|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.address }}
     </div>
     <div>
       <label class="text-xs text-slate-500">الحالة</label>
-      {{ form.status|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.status }}
     </div>
     <div class="md:col-span-3">
       <label class="text-xs text-slate-500">ملاحظات</label>
-      {{ form.notes|as_widget:attr:{'class':'w-full border rounded px-3 py-2'} }}
+      {{ form.notes }}
     </div>
   </div>
   <div class="mt-3 flex gap-2">
