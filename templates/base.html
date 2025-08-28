@@ -9,25 +9,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
   </head>
-  <body class="bg-slate-100 text-slate-900">
-    <div class="max-w-7xl mx-auto p-4">
-      <header class="mb-6">
-        <div class="flex items-center justify-between">
-          <h1 class="text-xl font-bold">acc_modern</h1>
-          <nav class="flex gap-2">
-            <a href="/" class="px-3 py-1 rounded bg-slate-900 text-white">الرئيسية</a>
-            <a href="/customers/" class="px-3 py-1 rounded bg-white shadow">العملاء</a>
-            <a href="/units/" class="px-3 py-1 rounded bg-white shadow">الوحدات</a>
-            <a href="/contracts/" class="px-3 py-1 rounded bg-white shadow">العقود</a>
-            <a href="/vouchers/" class="px-3 py-1 rounded bg-white shadow">السندات</a>
-            <a href="/partners/" class="px-3 py-1 rounded bg-white shadow">الشركاء</a>
-            <a href="/treasury/" class="px-3 py-1 rounded bg-white shadow">الخزينة</a>
-            <a href="/reports/" class="px-3 py-1 rounded bg-white shadow">التقارير</a>
-            <a href="/admin/" class="px-3 py-1 rounded bg-slate-200">الإدارة</a>
-          </nav>
+  <body class="min-h-screen bg-slate-50 text-slate-900">
+    <div class="flex min-h-screen">
+      <aside class="w-64 bg-white border-l border-slate-200 p-4 hidden md:block">
+        <div class="mb-6">
+          <div class="text-xl font-bold">acc_modern</div>
+          <div class="text-xs text-slate-500">Django + HTMX</div>
         </div>
-      </header>
-      {% block content %}{% endblock %}
+        <nav class="space-y-2">
+          <a href="/" class="block px-3 py-2 rounded hover:bg-slate-100">الصفحة الرئيسية</a>
+          <a href="/customers/" class="block px-3 py-2 rounded hover:bg-slate-100">العملاء</a>
+          <a href="/units/" class="block px-3 py-2 rounded hover:bg-slate-100">الوحدات</a>
+          <a href="/contracts/" class="block px-3 py-2 rounded hover:bg-slate-100">العقود</a>
+          <a href="/vouchers/" class="block px-3 py-2 rounded hover:bg-slate-100">السندات</a>
+          <a href="/partners/" class="block px-3 py-2 rounded hover:bg-slate-100">الشركاء</a>
+          <a href="/treasury/" class="block px-3 py-2 rounded hover:bg-slate-100">الخزينة</a>
+          <a href="/reports/" class="block px-3 py-2 rounded hover:bg-slate-100">التقارير</a>
+          <a href="/admin/" class="block px-3 py-2 rounded hover:bg-slate-100">الإدارة</a>
+        </nav>
+      </aside>
+      <main class="flex-1 p-4 md:p-6">
+        <header class="mb-4 md:mb-6">
+          <div class="flex items-center justify-between">
+            <h1 class="text-lg md:text-2xl font-bold">{% block title %}لوحة التحكم{% endblock %}</h1>
+            <div class="hidden md:flex items-center gap-2">
+              <a href="/admin/" class="px-3 py-1.5 rounded bg-slate-900 text-white">الإدارة</a>
+            </div>
+          </div>
+        </header>
+        {% block content %}{% endblock %}
+      </main>
     </div>
   </body>
   </html>
