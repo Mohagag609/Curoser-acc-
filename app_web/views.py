@@ -14,6 +14,11 @@ def customers_index(request):
     return render(request, 'customers/index.html', {"title": "العملاء"})
 
 
+def customer_form(request):
+    form = CustomerForm()
+    return render(request, 'customers/_form.html', {"form": form})
+
+
 def customers_table(request):
     q = (request.GET.get('q') or '').strip()
     qs = m.Customer.objects.all().order_by('name')
@@ -56,6 +61,11 @@ def customer_delete(request, pk: int):
 
 def units_index(request):
     return render(request, 'units/index.html', {"title": "الوحدات"})
+
+
+def unit_form(request):
+    form = UnitForm()
+    return render(request, 'units/_form.html', {"form": form})
 
 
 def units_table(request):
