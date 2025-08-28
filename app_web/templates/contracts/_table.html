@@ -1,0 +1,24 @@
+<table class="min-w-full text-sm">
+  <thead>
+    <tr class="text-right text-slate-500">
+      <th class="py-2">الكود</th>
+      <th class="py-2">الوحدة</th>
+      <th class="py-2">العميل</th>
+      <th class="py-2">السعر</th>
+      <th class="py-2">البدء</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in contracts %}
+    <tr class="border-t">
+      <td class="py-2">{{ c.code }}</td>
+      <td class="py-2">{{ c.unit.code }}</td>
+      <td class="py-2">{{ c.customer.name }}</td>
+      <td class="py-2">{{ c.total_price }}</td>
+      <td class="py-2">{{ c.start }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="py-6 text-center text-slate-500">لا توجد بيانات</td></tr>
+    {% endfor %}
+  </tbody>
+</table>

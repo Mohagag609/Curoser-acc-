@@ -1,0 +1,73 @@
+<form class="bg-slate-50 border rounded p-3"
+      hx-post="{% url 'contract_create' %}" hx-target="#ct-table" hx-swap="outerHTML">
+  {% csrf_token %}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div>
+      <label class="text-xs text-slate-500">الوحدة</label>
+      {{ form.unit }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">العميل</label>
+      {{ form.customer }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">السعر الكلي</label>
+      {{ form.total_price }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">المقدم</label>
+      {{ form.down_payment }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">الخصم</label>
+      {{ form.discount_amount }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">وديعة الصيانة</label>
+      {{ form.maintenance_deposit }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">نوع السداد</label>
+      {{ form.payment_type }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">نوع الجدولة</label>
+      {{ form.schedule_type }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">عدد الدفعات</label>
+      {{ form.count }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">السنوية الإضافية</label>
+      {{ form.extra_annual }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">قيمة السنوية</label>
+      {{ form.annual_payment_value }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">تاريخ البدء</label>
+      {{ form.start }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">السمسار</label>
+      {{ form.broker_name }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">نسبة العمولة %</label>
+      {{ form.broker_percent }}
+    </div>
+    <div>
+      <label class="text-xs text-slate-500">خزنة العمولة</label>
+      {{ form.commission_safe }}
+    </div>
+  </div>
+  <div class="mt-3 flex gap-2">
+    <button class="px-4 py-2 rounded bg-slate-900 text-white">حفظ</button>
+    <button class="px-4 py-2 rounded bg-slate-200" type="button" onclick="document.querySelector('#ct-form').innerHTML=''">إلغاء</button>
+  </div>
+  {% if form.errors %}
+    <div class="mt-2 text-red-600 text-sm">برجاء تصحيح الأخطاء.</div>
+  {% endif %}
+</form>
