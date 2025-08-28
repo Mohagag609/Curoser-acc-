@@ -1,0 +1,11 @@
+{
+  "name": "acc_modern",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./static/src/tailwind.css -o ./static/css/tailwind.css --watch",
+    "build": "tailwindcss -i ./static/src/tailwind.css -o ./static/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.12"
+  }
+}

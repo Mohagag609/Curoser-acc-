@@ -1,0 +1,8 @@
+Django~=5.1
+django-htmx
+psycopg[binary]
+python-dotenv
+dj-database-url
+gunicorn
+openpyxl
+whitenoise
