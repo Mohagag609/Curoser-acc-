@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}الأقساط{% endblock %}
+{% block page_title %}الأقساط{% endblock %}
+{% block content %}
+<div class="bg-white rounded shadow p-4">
+  <div id="i-table" hx-get="{% url 'installments_table' %}" hx-trigger="load"></div>
+</div>
+{% endblock %}

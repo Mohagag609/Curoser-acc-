@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from app_core import models as m
-from .forms import CustomerForm, UnitForm, ContractForm
+from .forms import CustomerForm, UnitForm, ContractForm, InstallmentPayForm
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -201,7 +201,7 @@ def contract_create(request):
 
 
 def vouchers_index(request):
-    return render(request, 'scaffold/list.html', {"title": "السندات"})
+    return render(request, 'vouchers/index.html', {"title": "السندات"})
 
 
 def partners_index(request):
@@ -209,11 +209,75 @@ def partners_index(request):
 
 
 def treasury_index(request):
-    return render(request, 'scaffold/list.html', {"title": "الخزينة"})
+    return render(request, 'treasury/index.html', {"title": "الخزينة"})
 
 
 def reports_index(request):
     return render(request, 'scaffold/list.html', {"title": "التقارير"})
+
+
+def installments_index(request):
+    return render(request, 'installments/index.html', {"title": "الأقساط"})
+
+
+def installments_table(request):
+    qs = m.Installment.objects.select_related('unit').order_by('due_date')
+    return render(request, 'installments/_table.html', {"installments": qs})
+
+
+@require_POST
+def installment_pay(request, pk: int):
+    inst = get_object_or_404(m.Installment, pk=pk)
+    form = InstallmentPayForm(request.POST)
+    if not form.is_valid():
+        return HttpResponseBadRequest("invalid")
+    amount = form.cleaned_data['amount']
+    date = form.cleaned_data['date']
+    safe = form.cleaned_data['safe']
+    # create voucher receipt
+    m.Voucher.objects.create(
+        type='receipt',
+        date=date,
+        amount=amount,
+        safe=safe,
+        description=f"سداد قسط للوحدة {inst.unit.code}",
+        installment=inst,
+        unit=inst.unit,
+    )
+    safe.balance = (safe.balance or 0) + amount
+    safe.save(update_fields=['balance'])
+    # apply to installment
+    rem = float(inst.amount_remaining)
+    pay = float(amount)
+    new_rem = max(rem - pay, 0)
+    inst.amount_remaining = new_rem
+    if new_rem <= 0:
+        inst.status = 'مدفوع'
+        inst.payment_date = date
+    else:
+        inst.status = 'مدفوع جزئياً'
+    inst.save()
+    return installments_table(request)
+
+
+def vouchers_table(request):
+    qs = m.Voucher.objects.select_related('safe').order_by('-date')
+    return render(request, 'vouchers/_table.html', {"vouchers": qs})
+
+
+def safes_table(request):
+    qs = m.Safe.objects.all().order_by('name')
+    return render(request, 'treasury/_table.html', {"safes": qs})
+
+
+@require_POST
+def safe_create(request):
+    name = (request.POST.get('name') or '').strip()
+    bal = request.POST.get('balance') or '0'
+    if not name:
+        return HttpResponseBadRequest('name')
+    m.Safe.objects.create(name=name, balance=bal)
+    return safes_table(request)
 from django.shortcuts import render
 
 # Create your views here.

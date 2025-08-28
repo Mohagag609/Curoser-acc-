@@ -25,4 +25,13 @@ urlpatterns = [
     path('partners/', views.partners_index, name='partners_index'),
     path('treasury/', views.treasury_index, name='treasury_index'),
     path('reports/', views.reports_index, name='reports_index'),
+    # installments
+    path('installments/', views.installments_index, name='installments_index'),
+    path('installments/table/', views.installments_table, name='installments_table'),
+    path('installments/<int:pk>/pay/', views.installment_pay, name='installment_pay'),
+    # vouchers
+    path('vouchers/table/', views.vouchers_table, name='vouchers_table'),
+    # safes
+    path('treasury/table/', views.safes_table, name='safes_table'),
+    path('treasury/create/', views.safe_create, name='safe_create'),
 ]

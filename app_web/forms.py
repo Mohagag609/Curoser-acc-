@@ -81,6 +81,12 @@ class ExpenseVoucherForm(forms.Form):
     safe = forms.ModelChoiceField(queryset=m.Safe.objects.all())
 
 
+class InstallmentPayForm(forms.Form):
+    amount = forms.DecimalField(max_digits=14, decimal_places=2)
+    date = forms.DateField()
+    safe = forms.ModelChoiceField(queryset=m.Safe.objects.all())
+
+
 SCHEDULE_TYPES = (
     ("شهري", "شهري"),
     ("ربع سنوي", "ربع سنوي"),

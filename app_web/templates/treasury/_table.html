@@ -1,0 +1,18 @@
+<table class="min-w-full text-sm">
+  <thead>
+    <tr class="text-right text-slate-500">
+      <th class="py-2">الخزنة</th>
+      <th class="py-2">الرصيد</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in safes %}
+    <tr class="border-t">
+      <td class="py-2">{{ s.name }}</td>
+      <td class="py-2">{{ s.balance }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="2" class="py-6 text-center text-slate-500">لا توجد بيانات</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
