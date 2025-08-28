@@ -6,7 +6,7 @@
   <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-3 mb-4">
     <input id="c-q" name="q" class="border rounded px-3 py-2 flex-1" placeholder="بحث بالاسم..." hx-get="{% url 'customers_table' %}" hx-target="#c-table" hx-trigger="keyup changed delay:300ms" />
     <button class="px-4 py-2 rounded bg-slate-900 text-white"
-            hx-get="{% url 'customer_edit' 0 %}" hx-target="#c-form" hx-swap="innerHTML">
+            hx-get="{% url 'customer_form' %}" hx-target="#c-form" hx-swap="innerHTML">
       إضافة عميل
     </button>
   </div>
