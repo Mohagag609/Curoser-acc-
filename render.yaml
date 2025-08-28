@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: acc-modern
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn -b 0.0.0.0:$PORT acc_modern.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "*"
+      # IMPORTANT: set this in the dashboard to your Postgres URL (Neon/Render PG)
+      # - key: DATABASE_URL
+      #   value: "postgres://USER:PASSWORD@HOST:PORT/DBNAME"
+      # For admin CSRF in production, set your Render domain here
+      # - key: CSRF_TRUSTED_ORIGINS
+      #   value: "https://your-app.onrender.com"
