@@ -6,3 +6,4 @@ dj-database-url
 gunicorn
 openpyxl
 whitenoise
+python-dateutil
