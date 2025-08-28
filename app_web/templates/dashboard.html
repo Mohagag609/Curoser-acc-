@@ -2,22 +2,28 @@
 {% block title %}لوحة التحكم{% endblock %}
 {% block page_title %}لوحة التحكم{% endblock %}
 {% block content %}
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-  <div class="rounded-lg p-4 bg-white shadow">
-    <div class="text-sm text-slate-500">إجمالي المبيعات</div>
-    <div class="text-2xl font-bold">—</div>
+<div class="kpi-grid">
+  <div class="kpi"><div class="label">إجمالي المبيعات</div><div class="value">—</div></div>
+  <div class="kpi"><div class="label">إجمالي المتحصلات</div><div class="value">—</div></div>
+  <div class="kpi"><div class="label">إجمالي المديونية</div><div class="value">—</div></div>
+  <div class="kpi"><div class="label">إجمالي المصروفات</div><div class="value">—</div></div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+  <div class="card">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="font-bold">إجراءات سريعة</h3>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <a href="/customers/" class="btn btn-primary">عميل جديد</a>
+      <a href="/units/" class="btn btn-primary">وحدة جديدة</a>
+      <a href="/contracts/" class="btn btn-primary">عقد جديد</a>
+      <a href="/vouchers/" class="btn btn-secondary">سندات</a>
+    </div>
   </div>
-  <div class="rounded-lg p-4 bg-white shadow">
-    <div class="text-sm text-slate-500">إجمالي المتحصلات</div>
-    <div class="text-2xl font-bold">—</div>
-  </div>
-  <div class="rounded-lg p-4 bg-white shadow">
-    <div class="text-sm text-slate-500">إجمالي المديونية</div>
-    <div class="text-2xl font-bold">—</div>
-  </div>
-  <div class="rounded-lg p-4 bg-white shadow">
-    <div class="text-sm text-slate-500">إجمالي المصروفات</div>
-    <div class="text-2xl font-bold">—</div>
+  <div class="card">
+    <h3 class="font-bold mb-3">آخر النشاط</h3>
+    <div class="text-sm text-slate-500">سيظهر هنا أحدث الحركات بعد إدخال البيانات.</div>
   </div>
 </div>
 {% endblock %}
