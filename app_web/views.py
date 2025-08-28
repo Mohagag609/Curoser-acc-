@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from app_core import models as m
-from .forms import CustomerForm, UnitForm, ContractForm, InstallmentPayForm
+from .forms import CustomerForm, UnitForm, ContractForm, InstallmentPayForm, PartnerForm, PartnerGroupForm, PartnerGroupMemberForm
+from django.utils.timezone import now
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -222,7 +223,8 @@ def installments_index(request):
 
 def installments_table(request):
     qs = m.Installment.objects.select_related('unit').order_by('due_date')
-    return render(request, 'installments/_table.html', {"installments": qs})
+    safes = m.Safe.objects.all().order_by('name')
+    return render(request, 'installments/_table.html', {"installments": qs, "safes": safes})
 
 
 @require_POST
